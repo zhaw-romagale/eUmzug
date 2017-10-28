@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="ch.zhaw.sml.iwi.gpi.eumzug" v="4.6.1" rws="_15091751568532" Pws="_15091751568532" cws="_15091751568532" persistenceUnitName="DEFAULT_PU" sm="false" xs="false" id="_15091751568531" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity compositePrimaryKeyClass="TransaktionslogPK" abs="false" class="Transaktionslog" v="true" jbn="false" xre="false" m="false" rootElement="_15091751568531" id="_1509175165941">
+        <jpa:des>Das Transaktionslog beinhaltet Informationen zu verschiedenen Aktionen. Diese werden abgespeichert, um aus rechtlichen Gründen nachvollziehen zu können, welcher User welche Aktionen durchgeführt hat.</jpa:des>
+        <jpa:ath>Alessio</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" xvt="" name="aktion" ft="false" id="_15091752283055">
+                <jpa:des>Der Name der Aktion die ausgeführt wurde (z.B. der Name des Fehlers, usw.)</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="false"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" xvt="" name="vn" ft="false" id="_15091752820126">
+                <jpa:des>Die AHVN13 Nummer der Person. Wird hauptsächlich für Suchzwecke gebraucht, da diese bereits in der Spalte variable_map enthalten sein sollte</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" xvt="" name="variable_map" ft="false" id="_15091752947247">
+                <jpa:des>variable-map from camunda as json</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.sql.Date" v="true" xvt="" name="date_time" ft="false" id="_15091756013418">
+                <jpa:des>Das Datum und die Zeit wann diese Aktion durchgeführt worden ist</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_15091751659913">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Transaktionslog.findAll">
+            <jpa:query>Select e from Transaktionslog e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Transaktionslog.findByAktion">
+            <jpa:query>Select t from Transaktionslog t where t.aktion=:aktion</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Transaktionslog.findByVn">
+            <jpa:query>Select t from Transaktionslog t where t.vn=:vn</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Transaktionslog.findByVariable_map">
+            <jpa:query>Select t from Transaktionslog t where t.variable_map=:variable_map</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Transaktionslog.findByDate_time">
+            <jpa:query>Select t from Transaktionslog t where t.date_time=:date_time</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="GemeindePK" abs="false" class="Gemeinde" v="true" jbn="false" xre="false" m="false" rootElement="_15091751568531" id="_1509176215571">
+        <jpa:des>Tabelle für die verschiedenen Gemeinden mit den enstprechenden Gebühren, der Bezeichnung und der hochzuladenen Dokumenten</jpa:des>
+        <jpa:ath>Alessio</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="gemeinde_bezeichnung" id="_150917668855211">
+                <jpa:des>Der Name der Gemeinde</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.math.BigDecimal" v="true" xvt="" name="gebuehr_umzug" ft="false" id="_150917673837112">
+                <jpa:des>Die Gebühr die anfallt, wenn eine Person innerhalb der selben Gemeinde umziehen will</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.math.BigDecimal" v="true" xvt="" name="gebuehr_wegzug" ft="false" id="_150917707558713">
+                <jpa:des>Die Gebühr die anfallt, wenn eine Person aus dieser Gemeinde ausziehen will</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.math.BigDecimal" v="true" xvt="" name="gebuehr_zuzug" ft="false" id="_150917713664714">
+                <jpa:des>Die Gebühr die anfallt, wenn eine Person in diese Gemeinde einziehen will</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" xvt="" name="eks_web_service" ft="false" id="_150917724577115">
+                <jpa:des>Dies entscheidet, welcher Webservice im EK-System aufgerufen wird. Auf Java-Ebene wird hier ein Enum verwendet anstatt Zahlen</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true" precision="0"/>
+            </jpa:basic>
+            <jpa:one-to-many own="true" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1509177762451" v="true" name="dokuments" id="_150917898927236"/>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="municipalityId" id="_15091762155719">
+                <jpa:des>BFS-Number</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="true" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Gemeinde.findAll">
+            <jpa:query>Select e from Gemeinde e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Gemeinde.findByGemeinde_bezeichnung">
+            <jpa:query>Select g from Gemeinde g where g.gemeinde_bezeichnung=:gemeinde_bezeichnung</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Gemeinde.findByGebuehr_umzug">
+            <jpa:query>Select g from Gemeinde g where g.gebuehr_umzug=:gebuehr_umzug</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Gemeinde.findByGebuehr_wegzug">
+            <jpa:query>Select g from Gemeinde g where g.gebuehr_wegzug=:gebuehr_wegzug</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Gemeinde.findByGebuehr_zuzug">
+            <jpa:query>Select g from Gemeinde g where g.gebuehr_zuzug=:gebuehr_zuzug</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Gemeinde.findByEks_web_service">
+            <jpa:query>Select g from Gemeinde g where g.eks_web_service=:eks_web_service</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="DokumentPK" abs="false" class="Dokument" v="true" jbn="false" xre="false" m="false" rootElement="_15091751568531" id="_1509177762451">
+        <jpa:des>Welche Dokumente müssen in welchemn Fall für diese Gemeinde hochgeladen werden. Die Dokumente wurden nicht ausgelagert, da die Anforderungen für die verschiedenen Gemeinden unterschiedlich sein könnte (z.B. kann Gemeinde 1 Die Geburtsurkunde nur verlangen wenn der User Ausländer ist, während Gemeinde 2 diese immer haben will)</jpa:des>
+        <jpa:ath>Alessio</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" xvt="" name="name" ft="false" id="_150917824072430">
+                <jpa:des>Der Name des Dokumkentes das hochgeladen werden muss</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="boolean" v="true" xvt="" name="verheiratet" dv="false" id="_150917828242431">
+                <jpa:des>Gibt an ob das Dokument hochgeladen werden muss, wenn der User verheiratet ist</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="boolean" v="true" xvt="" name="auslaender" dv="false" ft="false" id="_150917836789732">
+                <jpa:des>Gibt an ob das Dokument hochgeladen werden muss, wenn der User ein Ausländer ist</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="boolean" v="true" xvt="" name="kinder" dv="false" ft="true" id="_150917839942433">
+                <jpa:des>Gibt an ob das Dokument hochgeladen werden muss, wenn der User Kinder hat</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="boolean" v="true" xvt="" name="immer" dv="false" ft="false" id="_150917867789835">
+                <jpa:des>Gibt an ob das Dokument vom User in jedem Fall hochgeladen werden muss</jpa:des>
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_150917776245223">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Dokument.findAll">
+            <jpa:query>Select e from Dokument e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Dokument.findByName">
+            <jpa:query>Select d from Dokument d where d.name=:name</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Dokument.findByVerheiratet">
+            <jpa:query>Select d from Dokument d where d.verheiratet=:verheiratet</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Dokument.findByAuslaender">
+            <jpa:query>Select d from Dokument d where d.auslaender=:auslaender</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Dokument.findByKinder">
+            <jpa:query>Select d from Dokument d where d.kinder=:kinder</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Dokument.findByImmer">
+            <jpa:query>Select d from Dokument d where d.immer=:immer</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
+ * This file was generated by the Jeddict
+ */</jpa:snp>
+    <jpa:c>
+        <ct>java.util.List</ct>
+        <ct>java.util.Set</ct>
+        <ct>java.util.Map</ct>
+        <ct>java.util.Collection</ct>
+        <cit>java.util.ArrayList</cit>
+        <cit>java.util.LinkedList</cit>
+        <cit>java.util.HashSet</cit>
+        <cit>java.util.TreeSet</cit>
+        <cit>java.util.HashMap</cit>
+    </jpa:c>
+    <jpa:wsl>
+        <jpa:ws n="Main" id="_15091751568532">
+            <i ref="_1509175165941" x="458" y="256"/>
+            <i ref="_1509177762451" x="312" y="506"/>
+            <i ref="_1509176215571" x="137" y="245"/>
+        </jpa:ws>
+    </jpa:wsl>
+</jpa:entity-mappings>
